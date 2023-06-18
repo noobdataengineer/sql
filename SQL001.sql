@@ -91,15 +91,21 @@ SHOW CREATE TABLE skill;
 --- RETURN THE NAME OF EMPLOYEES WITH ID HAVING PROFICIENCY IN Python, SQL, Power BI 
 /*
 SELECT ID, CONCAT(Firstname, ' ', Lastname) AS Fullname FROM employees;
-SELECT EID FROM skill GROUP BY EID;
-
+SELECT * FROM skill;
+*/
 SELECT ID, CONCAT(Firstname, ' ', Lastname) AS Fullname FROM employees AS e
 	INNER JOIN skill AS s
-    ON s.EID=e.ID 
-    WHERE 
-	TECHNOLOGY='Python'; 
-*/
+    ON s.EID=e.ID
+	WHERE s.TECHNOLOGY IN ('Python', 'SQL', 'Power BI')
+	GROUP BY e.ID
+    HAVING COUNT(DISTINCT s.TECHNOLOGY) = 3;
     
+SELECT EID, GROUP_CONCAT(TECHNOLOGY)
+    FROM skill 
+    WHERE TECHNOLOGY IN ('Python', 'SQL', 'Power BI')
+    GROUP BY EID
+    HAVING COUNT(DISTINCT TECHNOLOGY) = 3; ---- Important
+ 
 --- RETURN THE PAGES IDs OF FACEBOOK PAGES CONDITION WITHOUT ANY LIKES IN ASCENDING ORDER
 SELECT page_id FROM pages WHERE page_id NOT IN (SELECT DISTINCT(page_id) FROM pages_likes);
 
@@ -107,3 +113,8 @@ SELECT page_id FROM pages WHERE page_id NOT IN (SELECT DISTINCT(page_id) FROM pa
 SELECT page_id FROM pages LEFT JOIN pages_likes AS p
 	ON pages.page_id=p.page_id WHERE
     liked_date = NULL;
+    
+--- FOR UNION YOU NEED EQUAL NUMBER OF COLUMNS AND FOR JOIN YOU NEED SAME KEY for example employee ID in HR table and ID of employees Finance-Payroll
+SELECT * FROM pages
+UNION
+SELECT * FROM skill;
