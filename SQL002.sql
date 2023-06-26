@@ -227,3 +227,33 @@ SELECT o.*, c.* FROM Orders o
 FULL OUTER JOIN Customers c ON o.custom_id=c.custom_id;
 
 -- JOIN ON more than 2 tables
+CREATE TABLE shippers(
+	 shipper_id INT PRIMARY KEY,
+     order_id INT,
+     shipper_name VARCHAR(10)
+     );
+     
+INSERT INTO shippers VALUE(001, 36564, 'J-ARRIVED'),(002, 84563, 'F-KART'),(003, 84564, 'J-CART'),(004, 96563, 'eKART'),(005, 94563, 'Bluekart');
+
+SELECT o.order_id, o.custom_id, c.custom_id, c.customer_number, s.shipper_name FROM ORDERS o
+INNER JOIN Customers c ON o.custom_id=c.custom_id
+INNER JOIN shippers s ON o.order_id=s.order_id;
+
+
+SELECT o.order_id, o.custom_id, c.custom_id, c.customer_number, s.shipper_name FROM ORDERS o
+INNER JOIN Customers c ON o.custom_id=c.custom_id
+LEFT JOIN shippers s ON o.order_id=s.order_id;
+
+
+SELECT o.order_id, o.custom_id, c.custom_id, c.customer_number, s.shipper_name FROM ORDERS o
+INNER JOIN Customers c ON o.custom_id=c.custom_id
+RIGHT JOIN shippers s ON o.order_id=s.order_id;
+
+SELECT o.order_id, o.custom_id, c.custom_id, c.customer_number, s.shipper_name FROM ORDERS o
+RIGHT JOIN Customers c ON o.custom_id=c.custom_id
+LEFT JOIN shippers s ON o.order_id=s.order_id;
+
+SELECT o.order_id, o.custom_id, c.custom_id, c.customer_number, s.shipper_name FROM ORDERS o
+LEFT JOIN Customers c ON o.custom_id=c.custom_id
+LEFT JOIN shippers s ON o.order_id=s.order_id;
+
