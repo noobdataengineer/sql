@@ -201,6 +201,11 @@ INSERT INTO CUSTOMERS VALUES(2006, 346521, 'USA'),
 -- JOINS - refernce from JOIN.png
 /*
 INNER JOIN/JOIN --- only those record where the common_col values are matched
+
+OUTER IS NOT MAKE ANY CHANGE IN RESULTS
+INNER JOIN = JOIN
+LEFT OUTER JOIN = LEFT JOIN
+RIGHT OUTER JOIN = RIGHT JOIN
 */
 SELECT o.order_id, o.custom_id, o.country FROM Orders o
 INNER JOIN Customers c ON o.custom_id=c.custom_id;
@@ -208,14 +213,14 @@ INNER JOIN Customers c ON o.custom_id=c.custom_id;
 SELECT o.order_id, o.custom_id, o.country FROM Orders o
 LEFT JOIN Customers c ON o.custom_id=c.custom_id;
 
--- LEFT JOIN EXCLUDING INNER JOIN means LEFT OUTER JOIN
+-- LEFT JOIN INCLUDING INNER JOIN means LEFT OUTER JOIN
 SELECT o.order_id, o.custom_id, o.country FROM Orders o
 LEFT OUTER JOIN Customers c ON o.custom_id=c.custom_id;
 
 SELECT o.order_id, o.custom_id, o.country FROM Orders o
 RIGHT JOIN Customers c ON o.custom_id=c.custom_id;
 
--- RIGHT JOIN EXCLUDING INNER JOIN means RIGHT OUTER JOIN 
+-- RIGHT JOIN INCLUDING INNER JOIN means RIGHT OUTER JOIN 
 SELECT o.*, c.* FROM Orders o
 RIGHT OUTER JOIN Customers c ON o.custom_id=c.custom_id;
 
